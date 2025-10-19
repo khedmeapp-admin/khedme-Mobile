@@ -19,6 +19,11 @@
         "backgroundColor": "#C32865"
       },
       "package": "com.blkhedme.app"
+      "extra": {
+  "eas": {
+    "projectId": "d1dc67da-a3b6-4c6a-9491-d7a566185d99"
+  }
+}
     }
   }
 }
