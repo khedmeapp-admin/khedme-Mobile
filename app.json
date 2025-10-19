@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "blkhedme",
+    "slug": "blkhedme",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#C32865"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": { "supportsTablet": false },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#C32865"
+      },
+      "package": "com.yourname.khedmebal"
+    }
+  }
+}
