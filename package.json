@@ -9,7 +9,7 @@
     "build:apk": "expo build:android -t apk"
   },
   "dependencies": {
-    "expo": "~49.0.0",
+    "expo": "54.0.0",
     "react": "18.2.0",
     "react-native": "0.72.10"
   },
