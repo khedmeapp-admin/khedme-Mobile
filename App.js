@@ -1,43 +1,32 @@
-import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
-import * as DocumentPicker from 'expo-document-picker';
-import { supabase } from './supabase'; // make sure supabase.js exists in the same folder
+const pickClientID = async () => {
+  let result = await DocumentPicker.getDocumentAsync({
+    type: 'application/pdf', // only allow PDF files
+  });
 
-export default function App() {
+  if (result.type === 'success') {
+    console.log('File picked:', result.uri);
 
-  // Function to pick a client ID file
-  const pickClientID = async () => {
-    let result = await DocumentPicker.getDocumentAsync({
-      type: 'application/pdf', // only allow PDF files
-    });
+    // Convert the picked file into a blob
+    const response = await fetch(result.uri);
+    const blob = await response.blob();
 
-    if (result.type === 'success') {
-      console.log('File picked:', result.uri);
-      alert('File picked! Check console for URI.');
+    // Generate a unique file name
+    const fileName = `client_${Date.now()}.pdf`;
+
+    // Upload the file to Supabase Storage → clients bucket → id_documents folder
+    const { data, error } = await supabase
+      .storage
+      .from('clients') // your clients bucket
+      .upload(`id_documents/${fileName}`, blob);
+
+    if (error) {
+      console.log('Upload error:', error);
+      alert('Upload failed!');
     } else {
-      console.log('File picking cancelled');
+      console.log('File uploaded:', data);
+      alert('File uploaded successfully!');
     }
-  };
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>بالخدمة</Text>
-      <Button title="Upload Client ID" onPress={pickClientID} />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    backgroundColor: '#C32865', 
-    alignItems: 'center', 
-    justifyContent: 'center' 
-  },
-  text: { 
-    color: '#fff', 
-    fontSize: 32, 
-    fontWeight: 'bold', 
-    marginBottom: 20 
+  } else {
+    console.log('File picking cancelled');
   }
-});
+};
