@@ -1,32 +1,37 @@
-const pickClientID = async () => {
-  let result = await DocumentPicker.getDocumentAsync({
-    type: 'application/pdf', // only allow PDF files
-  });
+import React, { useState } from 'react';
+import { View, Text, Button, Alert } from 'react-native';
+import * as DocumentPicker from 'expo-document-picker';
+import { createClient } from '@supabase/supabase-js';
 
-  if (result.type === 'success') {
-    console.log('File picked:', result.uri);
+const supabaseUrl = 'YOUR_SUPABASE_URL';
+const supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY';
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-    // Convert the picked file into a blob
-    const response = await fetch(result.uri);
-    const blob = await response.blob();
+export default function App() {
+  const [fileName, setFileName] = useState('');
 
-    // Generate a unique file name
-    const fileName = `client_${Date.now()}.pdf`;
-
-    // Upload the file to Supabase Storage → clients bucket → id_documents folder
-    const { data, error } = await supabase
-      .storage
-      .from('clients') // your clients bucket
-      .upload(`id_documents/${fileName}`, blob);
-
-    if (error) {
-      console.log('Upload error:', error);
-      alert('Upload failed!');
-    } else {
-      console.log('File uploaded:', data);
-      alert('File uploaded successfully!');
+  const pickAndUploadFile = async () => {
+    const result = await DocumentPicker.getDocumentAsync({});
+    if (result.type === 'success') {
+      setFileName(result.name);
+      
+      const { data, error } = await supabase.storage
+        .from('clients') // or 'providers' bucket
+        .upload(result.name, await fetch(result.uri).then(r => r.blob()));
+      
+      if (error) {
+        Alert.alert('Upload failed', error.message);
+      } else {
+        Alert.alert('Upload successful', result.name);
+      }
     }
-  } else {
-    console.log('File picking cancelled');
-  }
-};
+  };
+
+  return (
+    <View style={{ flex:1, justifyContent:'center', alignItems:'center' }}>
+      <Text>Upload Test</Text>
+      <Button title="Pick & Upload File" onPress={pickAndUploadFile} />
+      {fileName ? <Text>Last picked file: {fileName}</Text> : null}
+    </View>
+  );
+}
