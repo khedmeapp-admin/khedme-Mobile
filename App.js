@@ -3,8 +3,8 @@ import { View, Text, Button, Alert } from 'react-native';
 import * as DocumentPicker from 'expo-document-picker';
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = 'YOUR_SUPABASE_URL';
-const supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY';
+const supabaseUrl = 'https://qlknslmcsfspgafrorzl.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFsa25zbG1jc2ZzcGdhZnJvcnpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2MDcwMzUsImV4cCI6MjA3NjE4MzAzNX0.UZOayOecmvuqcehU_j2NtGfEIffxfVOz3eqfhcrzxBs';
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default function App() {
