@@ -1,0 +1,32 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log
+yarn-debug.log
+package-lock.json
+yarn.lock
+
+# Expo
+.expo/
+.expo-shared/
+*.expo
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# macOS/Windows
+.DS_Store
+Thumbs.db
+
+# Build outputs
+build/
+dist/
+ios/build/
+android/app/build/
+
+# Misc
+.vscode/
+.idea/
+coverage/

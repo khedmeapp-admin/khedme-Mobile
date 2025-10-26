@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "blkhedme",
-    "slug": "blkhedme",
+    "slug": "khedmeapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,8 +11,12 @@
       "resizeMode": "contain",
       "backgroundColor": "#C32865"
     },
-    "assetBundlePatterns": ["**/*"],
-    "ios": { "supportsTablet": false },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false
+    },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -22,8 +26,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "d1dc67da-a3b6-4c6a-9491-d7a566105d99"
+        "projectId": "39d83081-f8f8-4702-ac45-a6733191e65a"
       }
-    }
+    },
+    "owner": "khedme-admin"
   }
 }
